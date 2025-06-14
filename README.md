@@ -21,7 +21,7 @@ Dự án này sử dụng **Playwright** để kiểm thử giao diện (UI) và
 ### 1. Clone project từ GitHub
 
 ```bash
-git clone duysonit-github
+git clone https://github.com/duysonit/playwright.git
 cd your-project
 
 ---
