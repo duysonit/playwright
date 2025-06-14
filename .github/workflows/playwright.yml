@@ -1,0 +1,36 @@
+name: Playwright + Cucumber + API Testing
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright Cucumber tests
+        run: npm run test:report
+
+      - name: Move HTML Report to default location
+        if: always()
+        run: |
+          mkdir -p ${{ github.workspace }}/test-report
+          cp -r playwright-report/* ${{ github.workspace }}/test-report
